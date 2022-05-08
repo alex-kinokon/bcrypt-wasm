@@ -1,6 +1,8 @@
 import crypto from "crypto"
 import assert from "assert"
-import Module from "./bcrypt"
+import createModule from "./bcrypt"
+
+const Module = createModule()
 
 const _genSalt = Module.cwrap("gen_salt", "string", ["string", "number", "array"])
 const _encrypt = Module.cwrap("encrypt", "string", ["string", "number", "string"])
@@ -93,5 +95,5 @@ function isString(value: any): value is string {
 }
 
 function isNumber(value: any): value is number {
-  return typeof value === "number"
+  return typeof value === "number" && !Number.isNaN(value)
 }

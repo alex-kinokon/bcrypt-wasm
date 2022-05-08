@@ -3,18 +3,16 @@ set -e
 mkdir -p lib
 emcc ./src/crypt/index.c \
 	--pre-js ./src/crypt/pre.js \
-	--extern-pre-js ./src/crypt/extern-pre.txt \
-	--extern-post-js ./src/crypt/extern-post.txt \
 	-fwasm-exceptions \
-	-o lib/bcrypt.js \
+	-O3 \
+	-o lib/bcrypt.mjs \
 	-s EXPORTED_RUNTIME_METHODS='["cwrap","lengthBytesUTF8"]' \
+	-s ENVIRONMENT=node \
 	-s BINARYEN_ASYNC_COMPILATION=0
-npx tsc
-npx esbuild lib/bcrypt.js \
-	--outfile=lib/bcrypt.js \
-	--allow-overwrite \
-	--platform=node \
-	--target=node16 \
-	--tree-shaking=true \
-	--minify-identifiers \
-	--minify-syntax >/dev/null
+sed -i.bak 's/if (ENVIRONMENT_IS_NODE)/if (true)/' lib/bcrypt.mjs
+npx rollup -c
+rm lib/bcrypt.mjs lib/bcrypt.mjs.bak
+npx terser lib/index.js \
+	--compress unsafe_methods,ecma=2021,sequences=false \
+	--output lib/index.js
+npx prettier --write lib/index.js --semi
