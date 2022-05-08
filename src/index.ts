@@ -48,7 +48,7 @@ export function hash(data: string, salt: string | number): string {
     salt = genSalt(salt)
   }
 
-  const encrypted = _encrypt(data, data.length, salt)
+  const encrypted = _encrypt(data, Module.lengthBytesUTF8(data), salt)
   if (encrypted === "INVALID_SALT") {
     throw new Error(
       "Invalid salt. Salt must be in the form of: $Vers$log2(NumRounds)$saltvalue"
@@ -69,7 +69,7 @@ export function compare(data: string, hash: string): boolean {
   assert(isString(data), "data must be a string")
   assert(isString(hash), "hash must be a string")
 
-  return _compare(data, data.length, hash)
+  return _compare(data, Module.lengthBytesUTF8(data), hash)
 }
 
 /**
