@@ -1,0 +1,19 @@
+{
+  "cSpell.words": ["bcrypted"],
+  "files.associations": {
+    "*.sc": "scala",
+    "Cakefile": "coffeescript",
+    ".postcssrc": "json",
+    ".mementorc": "json",
+    "*.mhtml": "html",
+    "__locale": "cpp",
+    "__string": "cpp",
+    "string": "cpp",
+    "string_view": "cpp",
+    "array": "cpp",
+    "vector": "cpp",
+    "iterator": "cpp",
+    "stdexcept": "cpp",
+    "iosfwd": "c"
+  }
+}
