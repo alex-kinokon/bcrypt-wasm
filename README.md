@@ -2,6 +2,10 @@
 
 Port of [kelektiv/node.bcrypt.js](https://github.com/kelektiv/node.bcrypt.js) to WebAssembly.
 
+## Why
+
+I hate node-gyp.
+
 ## Build
 
 1. Download [emscripten](https://emscripten.org/docs/getting_started/downloads.html) to somewhere
