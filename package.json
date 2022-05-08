@@ -2,6 +2,7 @@
   "name": "@proteria/bcrypt",
   "version": "0.1.0",
   "description": "bcrypt in WebAssembly",
+  "main": "lib/index.js",
   "files": [
     "lib"
   ],
@@ -21,6 +22,7 @@
     "wasm-feature-detect": "^1.2.11"
   },
   "scripts": {
+    "build": "./build.sh",
     "test": "mocha test/**/*.test.ts"
   }
 }

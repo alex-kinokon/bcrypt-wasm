@@ -11,11 +11,15 @@ const _getRounds = Module.cwrap("get_rounds", "number", ["string"])
  * Generate a salt
  * @param rounds number of rounds (default 10)
  */
-export function genSalt(rounds = 10, minor: "a" | "b" = "b"): string {
+export function genSalt(
+  rounds = 10,
+  minor: "a" | "b" = "b",
+  seed = crypto.randomBytes(16)
+): string {
   assert(isNumber(rounds), "rounds must be a number")
   assert(minor === "a" || minor === "b", 'minor must be either "a" or "b"')
 
-  return _genSalt(minor, rounds, crypto.randomBytes(16))
+  return _genSalt(minor, rounds, seed)
 }
 
 /**
@@ -23,7 +27,16 @@ export function genSalt(rounds = 10, minor: "a" | "b" = "b"): string {
  * @param data the data to encrypt
  * @param salt the salt to use when hashing
  */
-export function hash(data: string, salt: string): string {
+export function hash(data: string, salt: string): string
+
+/**
+ * Hash data using an automatically generated salt
+ * @param data the data to encrypt
+ * @param round number of round to use when creating the salt
+ */
+export function hash(data: string, round: number): string
+
+export function hash(data: string, salt: string | number): string {
   assert(data != null && salt != null, "data and salt arguments required")
   assert(isString(data), "data must be a string")
   assert(
