@@ -17,4 +17,4 @@ npx esbuild lib/bcrypt.js \
 	--target=node16 \
 	--tree-shaking=true \
 	--minify-identifiers \
-	--minify-syntax
+	--minify-syntax >/dev/null
