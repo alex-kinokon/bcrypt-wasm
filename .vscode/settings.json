@@ -1,3 +1,4 @@
 {
-  "cSpell.words": ["bcrypted"]
+  "cSpell.words": ["bcrypted"],
+  "typescript.inlayHints.parameterNames.enabled": "none"
 }
